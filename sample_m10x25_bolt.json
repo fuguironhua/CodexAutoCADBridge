@@ -1,0 +1,647 @@
+{
+  "units": "mm",
+  "layers": [
+    {
+      "name": "BOLT_VISIBLE",
+      "color": 7
+    },
+    {
+      "name": "BOLT_THREAD",
+      "color": 3
+    },
+    {
+      "name": "BOLT_CENTER",
+      "color": 1
+    },
+    {
+      "name": "BOLT_DIM",
+      "color": 2
+    },
+    {
+      "name": "BOLT_TEXT",
+      "color": 5
+    },
+    {
+      "name": "BOLT_HIDDEN",
+      "color": 8
+    }
+  ],
+  "entities": [
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 45200,
+      "y": 23600,
+      "height": 320,
+      "text": "M10x25 hex bolt three-view - corrected",
+      "rotation": 0
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 45200,
+      "y": 23150,
+      "height": 220,
+      "text": "Top/front are true side projections; hexagon appears only in end/head view",
+      "rotation": 0
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 45200,
+      "y": 22800,
+      "height": 220,
+      "text": "Geometry scaled 100:1, dimensions shown in mm",
+      "rotation": 0
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 45200,
+      "y": 23450,
+      "height": 220,
+      "text": "Top view",
+      "rotation": 0
+    },
+    {
+      "type": "polyline",
+      "layer": "BOLT_VISIBLE",
+      "points": [
+        [
+          45360,
+          20790
+        ],
+        [
+          45480,
+          20670
+        ],
+        [
+          46000,
+          20670
+        ],
+        [
+          46000,
+          22630
+        ],
+        [
+          45480,
+          22630
+        ],
+        [
+          45360,
+          22510
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 45480,
+      "y1": 20670,
+      "x2": 45480,
+      "y2": 22630
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 46000,
+      "y1": 20670,
+      "x2": 46000,
+      "y2": 22630
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 46000,
+      "y1": 21150,
+      "x2": 48350,
+      "y2": 21150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 46000,
+      "y1": 22150,
+      "x2": 48350,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 48350,
+      "y1": 21150,
+      "x2": 48500,
+      "y2": 21225
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 48350,
+      "y1": 22150,
+      "x2": 48500,
+      "y2": 22075
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 48500,
+      "y1": 21225,
+      "x2": 48500,
+      "y2": 22075
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46180,
+      "y1": 21225,
+      "x2": 48300,
+      "y2": 21225
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46180,
+      "y1": 22075,
+      "x2": 48300,
+      "y2": 22075
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46150,
+      "y1": 21150,
+      "x2": 46150,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46450,
+      "y1": 21150,
+      "x2": 46450,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46750,
+      "y1": 21150,
+      "x2": 46750,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47050,
+      "y1": 21150,
+      "x2": 47050,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47350,
+      "y1": 21150,
+      "x2": 47350,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47650,
+      "y1": 21150,
+      "x2": 47650,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47950,
+      "y1": 21150,
+      "x2": 47950,
+      "y2": 22150
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_CENTER",
+      "x1": 45060,
+      "y1": 21650,
+      "x2": 48850,
+      "y2": 21650
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 44460,
+      "y": 22890,
+      "height": 200,
+      "text": "e≈19.6",
+      "rotation": 0
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 45200,
+      "y": 20170,
+      "height": 220,
+      "text": "Front view",
+      "rotation": 0
+    },
+    {
+      "type": "polyline",
+      "layer": "BOLT_VISIBLE",
+      "points": [
+        [
+          45360,
+          17770
+        ],
+        [
+          45480,
+          17650
+        ],
+        [
+          46000,
+          17650
+        ],
+        [
+          46000,
+          19350
+        ],
+        [
+          45480,
+          19350
+        ],
+        [
+          45360,
+          19230
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 45480,
+      "y1": 17650,
+      "x2": 45480,
+      "y2": 19350
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 46000,
+      "y1": 17650,
+      "x2": 46000,
+      "y2": 19350
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 46000,
+      "y1": 18000,
+      "x2": 48350,
+      "y2": 18000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 46000,
+      "y1": 19000,
+      "x2": 48350,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 48350,
+      "y1": 18000,
+      "x2": 48500,
+      "y2": 18075
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 48350,
+      "y1": 19000,
+      "x2": 48500,
+      "y2": 18925
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_VISIBLE",
+      "x1": 48500,
+      "y1": 18075,
+      "x2": 48500,
+      "y2": 18925
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46180,
+      "y1": 18075,
+      "x2": 48300,
+      "y2": 18075
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46180,
+      "y1": 18925,
+      "x2": 48300,
+      "y2": 18925
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46150,
+      "y1": 18000,
+      "x2": 46150,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46450,
+      "y1": 18000,
+      "x2": 46450,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 46750,
+      "y1": 18000,
+      "x2": 46750,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47050,
+      "y1": 18000,
+      "x2": 47050,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47350,
+      "y1": 18000,
+      "x2": 47350,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47650,
+      "y1": 18000,
+      "x2": 47650,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_THREAD",
+      "x1": 47950,
+      "y1": 18000,
+      "x2": 47950,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_CENTER",
+      "x1": 45060,
+      "y1": 18500,
+      "x2": 48850,
+      "y2": 18500
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 44460,
+      "y": 19610,
+      "height": 200,
+      "text": "s=17",
+      "rotation": 0
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 46000,
+      "y1": 17200,
+      "x2": 48500,
+      "y2": 17200
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 46000,
+      "y1": 16950,
+      "x2": 46000,
+      "y2": 17450
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 48500,
+      "y1": 16950,
+      "x2": 48500,
+      "y2": 17450
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 47020,
+      "y": 16850,
+      "height": 220,
+      "text": "L=25",
+      "rotation": 0
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 49150,
+      "y1": 18000,
+      "x2": 49150,
+      "y2": 19000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 48950,
+      "y1": 18000,
+      "x2": 49350,
+      "y2": 18000
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 48950,
+      "y1": 19000,
+      "x2": 49350,
+      "y2": 19000
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 49350,
+      "y": 18380,
+      "height": 220,
+      "text": "M10",
+      "rotation": 0
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 45360,
+      "y1": 19900,
+      "x2": 46000,
+      "y2": 19900
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 45360,
+      "y1": 19700,
+      "x2": 45360,
+      "y2": 20100
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_DIM",
+      "x1": 46000,
+      "y1": 19700,
+      "x2": 46000,
+      "y2": 20100
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 45440,
+      "y": 20150,
+      "height": 200,
+      "text": "k=6.4",
+      "rotation": 0
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 51600,
+      "y": 19800,
+      "height": 220,
+      "text": "Thread end view",
+      "rotation": 0
+    },
+    {
+      "type": "circle",
+      "layer": "BOLT_VISIBLE",
+      "x": 52500,
+      "y": 18500,
+      "radius": 500
+    },
+    {
+      "type": "circle",
+      "layer": "BOLT_THREAD",
+      "x": 52500,
+      "y": 18500,
+      "radius": 425
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_CENTER",
+      "x1": 51650,
+      "y1": 18500,
+      "x2": 53350,
+      "y2": 18500
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_CENTER",
+      "x1": 52500,
+      "y1": 17650,
+      "x2": 52500,
+      "y2": 19350
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 51880,
+      "y": 17250,
+      "height": 220,
+      "text": "M10 thread end",
+      "rotation": 0
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_TEXT",
+      "x": 51600,
+      "y": 23100,
+      "height": 220,
+      "text": "Head end view",
+      "rotation": 0
+    },
+    {
+      "type": "polyline",
+      "layer": "BOLT_VISIBLE",
+      "points": [
+        [
+          53481.49545762236,
+          21650
+        ],
+        [
+          52990.747728811184,
+          22500
+        ],
+        [
+          52009.252271188816,
+          22500
+        ],
+        [
+          51518.50454237764,
+          21650
+        ],
+        [
+          52009.252271188816,
+          20800
+        ],
+        [
+          52990.747728811184,
+          20800
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "type": "circle",
+      "layer": "BOLT_HIDDEN",
+      "x": 52500,
+      "y": 21650,
+      "radius": 500
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_CENTER",
+      "x1": 51300,
+      "y1": 21650,
+      "x2": 53700,
+      "y2": 21650
+    },
+    {
+      "type": "line",
+      "layer": "BOLT_CENTER",
+      "x1": 52500,
+      "y1": 20450,
+      "x2": 52500,
+      "y2": 22850
+    },
+    {
+      "type": "text",
+      "layer": "BOLT_DIM",
+      "x": 52050,
+      "y": 20250,
+      "height": 220,
+      "text": "s=17",
+      "rotation": 0
+    }
+  ]
+}

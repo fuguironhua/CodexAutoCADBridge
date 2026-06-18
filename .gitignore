@@ -1,0 +1,31 @@
+# Build outputs
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# Visual Studio / AutoCAD local files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.pdb
+*.cache
+*.log
+
+# Runtime and analysis scratch
+analysis/tmp/
+analysis/*.tmp
+analysis/*.bak
+
+# External reference repositories copied locally. Keep the main plugin
+# history simple; add these separately if they become build dependencies.
+external/DeepNestPort/
+
+# Keep curated DLL snapshots under releases/
+!releases/
+!releases/**/*.dll
+!releases/**/*.md
