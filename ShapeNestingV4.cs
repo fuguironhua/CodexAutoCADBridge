@@ -286,7 +286,9 @@ namespace CodexAutoCADBridge
     internal static class ShapeNestingV4Solver
     {
         private const double Gap = 2.0;
-        private const int Generations = 3;
+        private const int Generations = 10;
+        private static readonly bool SelectiveSlidePolishExperiment = true;
+        private static readonly bool FinalBoardSettleAfterSearch = false;
         private const int CandidateLimit = 96;
         private const int FillCandidateLimit = 64;
         private const int CoarseCandidateLimit = 36;
@@ -382,7 +384,7 @@ namespace CodexAutoCADBridge
 
             if (progress != null)
             {
-                progress("\n" + CodexBridgeVersion.Version + " V4 NFP-first fill: x6/x4/x2/x1 candidates, free-region placement hints plus protected contact polish.");
+                progress("\n" + CodexBridgeVersion.Version + " V4 selective-polish experiment: 10 generations, coarse candidate search, NFP/slide polish only after a placement is selected.");
                 progress("\nV4 search seed: " + _runSeed.ToString(CultureInfo.InvariantCulture) + ".");
                 progress("\nV4 type order: " + FormatTypeOrder(input, order) + ".");
                 progress("\nV4 generations: " + generationCount.ToString(CultureInfo.InvariantCulture) + ", individuals per generation: " + populationSize.ToString(CultureInfo.InvariantCulture) + ".");
@@ -537,7 +539,10 @@ namespace CodexAutoCADBridge
 
             FillVoids(input, boards, result, remaining, nextNumber, order, 0, strategy, templateCache, stepUpdated, generation, individual, progress);
             TryRepackTrailingTypes(input, boards, order, strategy, templateCache);
-            SettleBoardsBottomLeft(input, boards);
+            if (FinalBoardSettleAfterSearch)
+            {
+                SettleBoardsBottomLeft(input, boards);
+            }
 
             CompactBoards(boards);
             RebuildPlacements(result, boards);
@@ -698,6 +703,7 @@ namespace CodexAutoCADBridge
                 ShapePlacement selected = SelectPlacementChoice(choices, strategy, remaining + boardIndex * 1000);
                 if (selected != null)
                 {
+                    selected = PolishSelectedPlacement(input, boards[boardIndex], selected);
                     nextNumber[typeIndex] += CountParts(selected);
                     return selected;
                 }
@@ -1207,6 +1213,7 @@ namespace CodexAutoCADBridge
             }
             if (best != null)
             {
+                best = PolishSelectedPlacement(input, board, best);
                 nextNumber[typeIndex] += CountParts(best);
             }
             return best;
@@ -1661,7 +1668,7 @@ namespace CodexAutoCADBridge
                 }
             }
             ForcePreviewTemplates(input, previewTemplates, previewTypes, "fill candidates");
-            return best;
+            return PolishSelectedHolePlacement(input, board, best, hole);
         }
 
         private static ShapePlacement BestRoundFillForHole(ShapeNestingInput input, List<ShapePlacement> board, int boardIndex, int[] remaining, int[] nextNumber, int typeIndex, V4Hole hole, V4Strategy strategy)
@@ -1709,7 +1716,7 @@ namespace CodexAutoCADBridge
                     }
                 }
             }
-            return best;
+            return PolishSelectedHolePlacement(input, board, best, hole);
         }
 
         private static void KeepBestRoundHolePlacement(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template, V4Hole hole, double extraPenalty, ref ShapePlacement best, ref double bestScore)
@@ -1887,7 +1894,7 @@ namespace CodexAutoCADBridge
                     KeepBestHolePlacement(input, board, relaxed, template, hole, 0, input.BoardWidth * 120.0, ref best, ref bestScore);
                 }
             }
-            return best;
+            return PolishSelectedHolePlacement(input, board, best, hole);
         }
 
         private static void KeepBestHolePlacement(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template, V4Hole hole, int rank, double extraPenalty, ref ShapePlacement best, ref double bestScore)
@@ -1933,6 +1940,16 @@ namespace CodexAutoCADBridge
         }
 
         private static ShapePlacement SettlePlacementInsideHole(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template, V4Hole hole)
+        {
+            if (SelectiveSlidePolishExperiment)
+            {
+                return placement;
+            }
+
+            return FullSettlePlacementInsideHole(input, board, placement, template, hole);
+        }
+
+        private static ShapePlacement FullSettlePlacementInsideHole(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template, V4Hole hole)
         {
             ShapePlacement current = placement;
             for (int i = 0; i < 10; i++)
@@ -6690,6 +6707,20 @@ namespace CodexAutoCADBridge
 
         private static ShapePlacement SettlePlacementBottomLeft(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template)
         {
+            if (board.Count == 0)
+            {
+                return MakePlacement(placement.Part, template, placement.BoardIndex, 0.0, 0.0);
+            }
+            if (SelectiveSlidePolishExperiment)
+            {
+                return placement;
+            }
+
+            return FullSettlePlacementBottomLeft(input, board, placement, template);
+        }
+
+        private static ShapePlacement FullSettlePlacementBottomLeft(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template)
+        {
             long timingStart = V4Timing.Start();
             try
             {
@@ -6697,7 +6728,6 @@ namespace CodexAutoCADBridge
                 {
                     return MakePlacement(placement.Part, template, placement.BoardIndex, 0.0, 0.0);
                 }
-
                 ShapePlacement nfp = NfpSettlePlacement(input, board, placement, template);
                 if (nfp != null)
                 {
@@ -6711,6 +6741,59 @@ namespace CodexAutoCADBridge
                 _timing.SettleTicks += V4Timing.Elapsed(timingStart);
                 _timing.SettleCalls++;
             }
+        }
+
+        private static ShapePlacement PolishSelectedPlacement(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement)
+        {
+            if (placement == null || !SelectiveSlidePolishExperiment)
+            {
+                return placement;
+            }
+
+            V4Template template = TemplateFromPlacement(placement);
+            ShapePlacement polished = FullSettlePlacementBottomLeft(input, board, placement, template);
+            if (IsUsefulPolishedPlacement(input, board, placement, polished, false))
+            {
+                return polished;
+            }
+            return placement;
+        }
+
+        private static ShapePlacement PolishSelectedHolePlacement(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Hole hole)
+        {
+            if (placement == null || !SelectiveSlidePolishExperiment)
+            {
+                return placement;
+            }
+
+            V4Template template = TemplateFromPlacement(placement);
+            ShapePlacement strict = FullSettlePlacementInsideHole(input, board, placement, template, hole);
+            if (IsUsefulPolishedPlacement(input, board, placement, strict, true) && PlacementTouchesHole(strict, hole))
+            {
+                return strict;
+            }
+
+            ShapePlacement polished = FullSettlePlacementBottomLeft(input, board, placement, template);
+            if (IsUsefulPolishedPlacement(input, board, placement, polished, true) && PlacementTouchesHole(polished, hole))
+            {
+                return polished;
+            }
+            return placement;
+        }
+
+        private static bool IsUsefulPolishedPlacement(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement original, ShapePlacement polished, bool allowSmallRightGrowth)
+        {
+            if (polished == null || !FitsBoard(input, polished.Bounds) || HitsAny(polished, board))
+            {
+                return false;
+            }
+
+            double rightGrowthLimit = allowSmallRightGrowth ? Math.Max(0.5, Gap) : 0.5;
+            if (polished.Bounds.MaxX > original.Bounds.MaxX + rightGrowthLimit)
+            {
+                return false;
+            }
+            return true;
         }
 
         private static ShapePlacement NfpSettlePlacement(ShapeNestingInput input, List<ShapePlacement> board, ShapePlacement placement, V4Template template)
@@ -7834,7 +7917,7 @@ namespace CodexAutoCADBridge
                 ShapePlacement best = current;
                 double bestScore = FlowSettleScore(input, board, placement, current);
 
-                ShapePlacement nfpFirst = SettlePlacementBottomLeft(input, board, current, template);
+                ShapePlacement nfpFirst = FullSettlePlacementBottomLeft(input, board, current, template);
                 KeepBetterFlowSettle(input, board, placement, nfpFirst, ref best, ref bestScore);
 
                 ShapePlacement leftFirst = SlidePlacement(input, board, current, template, -1.0, 0.0);
@@ -7855,7 +7938,7 @@ namespace CodexAutoCADBridge
 
                 if ((board.Count <= 36 || IsFrontierPlacement(board, placement)) && best == current)
                 {
-                    ShapePlacement nfp = SettlePlacementBottomLeft(input, board, best, template);
+                    ShapePlacement nfp = FullSettlePlacementBottomLeft(input, board, best, template);
                     KeepBetterFlowSettle(input, board, placement, nfp, ref best, ref bestScore);
                 }
 
@@ -8154,7 +8237,11 @@ namespace CodexAutoCADBridge
                     }
                 }
             }
-            return best;
+            if (best == null || best.BoardIndex < 0 || best.BoardIndex >= boards.Count)
+            {
+                return best;
+            }
+            return PolishSelectedPlacement(input, boards[best.BoardIndex], best);
         }
 
         private static List<ShapePoint> RepackCandidatePoints(ShapeNestingInput input, List<ShapePlacement> board, V4Template template)

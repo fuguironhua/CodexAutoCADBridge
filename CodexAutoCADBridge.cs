@@ -17,7 +17,7 @@ namespace CodexAutoCADBridge
 {
     internal static class CodexBridgeVersion
     {
-        public const string Version = "GroupV4.130";
+        public const string Version = "GroupV4.132";
     }
 
     public class CodexCommands : IExtensionApplication

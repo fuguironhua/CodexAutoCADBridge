@@ -11,6 +11,7 @@ From the first Git commit onward, source changes can be rolled back with Git com
 | V4.122 | `releases/CodexAutoCADBridgeV4_122.dll` | Earlier quality baseline. Log showed best area utilization around 75.43%. |
 | V4.129 | `releases/CodexAutoCADBridgeV4_129.dll` | Faster baseline after lazy real-polygon caching. Log showed about 5.45s average per individual and best around 71.90%. |
 | V4.130 | `releases/CodexAutoCADBridgeV4_130.dll` | Current source snapshot at the time Git was initialized. Adds top-band hole candidates. |
+| V4.132 | `releases/CodexAutoCADBridgeV4_132.dll` | Selective polish experiment: 10 generations, coarse candidate scoring first, NFP/slide polish only after a placement is selected. Test result reached about 73.00% with lower time cost. |
 
 ## Build
 
